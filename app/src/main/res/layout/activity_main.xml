@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 第一位敌方英雄 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 显示分路的TextView -->
+        <TextView
+            android:id="@+id/lane1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上路" />
+
+        <!-- 选择召唤师技能的下拉菜单 -->
+        <Spinner
+            android:id="@+id/spell1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <Spinner
+            android:id="@+id/spell1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <!-- 开始倒计时的按钮 -->
+        <Button
+            android:id="@+id/start1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/start1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <!-- 显示剩余时间的TextView -->
+        <TextView
+            android:id="@+id/time1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/time1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+    </LinearLayout>
+
+    <!-- 第二位敌方英雄 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 显示分路的TextView -->
+        <TextView
+            android:id="@+id/lane2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中路" />
+
+        <!-- 选择召唤师技能的下拉菜单 -->
+        <Spinner
+            android:id="@+id/spell2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <Spinner
+            android:id="@+id/spell2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <!-- 开始倒计时的按钮 -->
+        <Button
+            android:id="@+id/start2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/start2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <!-- 显示剩余时间的TextView -->
+        <TextView
+            android:id="@+id/time2_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/time2_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+    </LinearLayout>
+
+    <!-- 第三位敌方英雄 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 显示分路的TextView -->
+        <TextView
+            android:id="@+id/lane3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下路" />
+
+        <!-- 选择召唤师技能的下拉菜单 -->
+        <Spinner
+            android:id="@+id/spell3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <Spinner
+            android:id="@+id/spell3_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <!-- 开始倒计时的按钮 -->
+        <Button
+            android:id="@+id/start3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/start3_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <!-- 显示剩余时间的TextView -->
+        <TextView
+            android:id="@+id/time3_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/time3_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+    </LinearLayout>
+
+    <!-- 第四位敌方英雄 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 显示分路的TextView -->
+        <TextView
+            android:id="@+id/lane4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="打野" />
+
+        <!-- 选择召唤师技能的下拉菜单 -->
+        <Spinner
+            android:id="@+id/spell4_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <Spinner
+            android:id="@+id/spell4_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <!-- 开始倒计时的按钮 -->
+        <Button
+            android:id="@+id/start4_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/start4_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <!-- 显示剩余时间的TextView -->
+        <TextView
+            android:id="@+id/time4_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/time4_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+    </LinearLayout>
+
+    <!-- 第五位敌方英雄 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 显示分路的TextView -->
+        <TextView
+            android:id="@+id/lane5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="辅助" />
+
+        <!-- 选择召唤师技能的下拉菜单 -->
+        <Spinner
+            android:id="@+id/spell5_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <Spinner
+            android:id="@+id/spell5_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/spells" />
+
+        <!-- 开始倒计时的按钮 -->
+        <Button
+            android:id="@+id/start5_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/start5_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="开始" />
+
+        <!-- 显示剩余时间的TextView -->
+        <TextView
+            android:id="@+id/time5_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/time5_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00" />
+    </LinearLayout>
+
+</LinearLayout>
