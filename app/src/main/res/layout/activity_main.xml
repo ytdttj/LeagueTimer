@@ -4,269 +4,443 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- 第一位敌方英雄 -->
+    <!-- 上路 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <!-- 显示分路的TextView -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
         <TextView
             android:id="@+id/lane1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上路" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="上路"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
-        <!-- 选择召唤师技能的下拉菜单 -->
-        <Spinner
-            android:id="@+id/spell1_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spell1_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell1_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
 
-        <!-- 开始倒计时的按钮 -->
-        <Button
-            android:id="@+id/start1_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start1_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/start1_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time1_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center" />
 
-        <!-- 显示剩余时间的TextView -->
-        <TextView
-            android:id="@+id/time1_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00" />
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight1_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/time1_2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00" />
+            android:orientation="horizontal">
+
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell1_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
+
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time1_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- 第二位敌方英雄 -->
+    <!-- 打野 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <!-- 显示分路的TextView -->
         <TextView
             android:id="@+id/lane2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="中路" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="打野"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-        <!-- 选择召唤师技能的下拉菜单 -->
-        <Spinner
-            android:id="@+id/spell2_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spell2_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell2_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
 
-        <!-- 开始倒计时的按钮 -->
-        <Button
-            android:id="@+id/start2_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/start2_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time2_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
 
-        <!-- 显示剩余时间的TextView -->
-        <TextView
-            android:id="@+id/time2_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00" />
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/time2_2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00" />
+            android:orientation="horizontal">
+
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell2_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
+
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time2_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- 第三位敌方英雄 -->
+    <!-- 中路 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <!-- 显示分路的TextView -->
         <TextView
             android:id="@+id/lane3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="下路" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="中路"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-        <!-- 选择召唤师技能的下拉菜单 -->
-        <Spinner
-            android:id="@+id/spell3_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spell3_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell3_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
 
-        <!-- 开始倒计时的按钮 -->
-        <Button
-            android:id="@+id/start3_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start3_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/start3_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time3_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
 
-        <!-- 显示剩余时间的TextView -->
-        <TextView
-            android:id="@+id/time3_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00" />
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight3_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/time3_2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00" />
+            android:orientation="horizontal">
+
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell3_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
+
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time3_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- 第四位敌方英雄 -->
+    <!-- 下路 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <!-- 显示分路的TextView -->
         <TextView
             android:id="@+id/lane4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="打野" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="下路"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-        <!-- 选择召唤师技能的下拉菜单 -->
-        <Spinner
-            android:id="@+id/spell4_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spell4_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell4_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
 
-        <!-- 开始倒计时的按钮 -->
-        <Button
-            android:id="@+id/start4_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start4_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/start4_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time4_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
 
-        <!-- 显示剩余时间的TextView -->
-        <TextView
-            android:id="@+id/time4_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00" />
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight4_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/time4_2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00" />
+            android:orientation="horizontal">
+
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell4_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
+
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start4_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time4_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight4_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
     </LinearLayout>
 
-    <!-- 第五位敌方英雄 -->
+    <!-- 辅助 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <!-- 显示分路的TextView -->
         <TextView
             android:id="@+id/lane5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="辅助" />
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="辅助"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-        <!-- 选择召唤师技能的下拉菜单 -->
-        <Spinner
-            android:id="@+id/spell5_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/spell5_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/spells" />
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell5_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
 
-        <!-- 开始倒计时的按钮 -->
-        <Button
-            android:id="@+id/start5_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
 
-        <Button
-            android:id="@+id/start5_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="开始" />
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time5_1"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
 
-        <!-- 显示剩余时间的TextView -->
-        <TextView
-            android:id="@+id/time5_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="00:00" />
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/time5_2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00" />
+            android:orientation="horizontal">
+
+            <!-- 选择召唤师技能的下拉菜单 -->
+            <Spinner
+                android:id="@+id/spell5_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:entries="@array/spells" />
+
+            <!-- 开始倒计时的按钮 -->
+            <Button
+                android:id="@+id/start5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开始" />
+
+            <!-- 显示剩余时间的TextView -->
+            <TextView
+                android:id="@+id/time5_2"
+                android:layout_width="97dp"
+                android:layout_height="match_parent"
+                android:text="00:00"
+                android:gravity="center"
+                android:textAlignment="center"/>
+
+            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
+            <Switch
+                android:id="@+id/insight5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="星界洞悉" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

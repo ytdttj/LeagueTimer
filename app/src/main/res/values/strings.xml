@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">League Timer</string>
+    <string-array name="spells">
+        <item>闪现</item>
+        <item>治疗</item>
+        <item>点燃</item>
+        <item>虚弱</item>
+        <item>净化</item>
+        <item>传送</item>
+        <item>屏障</item>
+        <item>惩戒</item>
+    </string-array>
 </resources>
