@@ -46,15 +46,16 @@
                 android:id="@+id/time1_1"
                 android:layout_width="97dp"
                 android:layout_height="match_parent"
-                android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center" />
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight1_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
 
@@ -82,15 +83,16 @@
                 android:id="@+id/time1_2"
                 android:layout_width="97dp"
                 android:layout_height="match_parent"
-                android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight1_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
     </LinearLayout>
@@ -133,15 +135,16 @@
                 android:id="@+id/time2_1"
                 android:layout_width="97dp"
                 android:layout_height="match_parent"
-                android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight2_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
 
@@ -169,15 +172,16 @@
                 android:id="@+id/time2_2"
                 android:layout_width="97dp"
                 android:layout_height="match_parent"
-                android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight2_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
     </LinearLayout>
@@ -222,13 +226,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight3_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
 
@@ -258,13 +263,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight3_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
     </LinearLayout>
@@ -309,13 +315,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight4_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
 
@@ -345,13 +352,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight4_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
     </LinearLayout>
@@ -396,13 +404,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight5_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
 
@@ -432,13 +441,14 @@
                 android:layout_height="match_parent"
                 android:text="00:00"
                 android:gravity="center"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
             <Switch
                 android:id="@+id/insight5_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="星界洞悉" />
         </LinearLayout>
     </LinearLayout>
