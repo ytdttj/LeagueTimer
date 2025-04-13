@@ -1,27 +1,27 @@
 package cc.ytdttj.leaguetimer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
+import android.widget.CheckBox;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
+
+    // 定义MediaPlayer用于播放提示音
+    private MediaPlayer mediaPlayer;
 
     // 定义5个路线的名称
     private String[] lanes = {"上路", "打野", "中路", "下路", "辅助"};
-
-    // 定义5个路线的spinner控件
-    private Spinner[] laneSpinners = new Spinner[5];
 
     // 定义5个路线的两个召唤师技能的spinner控件
     private Spinner[][] spellSpinners = new Spinner[5][2];
@@ -32,279 +32,253 @@ public class MainActivity extends AppCompatActivity
     // 定义5个路线的两个显示剩余时间的TextView控件
     private TextView[][] timeTextViews = new TextView[5][2];
 
-    // 定义5个路线的两个确认是否带了星界洞悉天赋的Switch控件
-    private Switch[][] insightSwitches = new Switch[5][2];
+    // 定义5个路线的两个确认是否带了星界洞悉天赋的CheckBox控件
+    private CheckBox[][] insightCheckBoxes = new CheckBox[5][2];
+    
+    // 定义5个路线的两个确认是否带了CD鞋的CheckBox控件
+    private CheckBox[][] bootsCheckBoxes = new CheckBox[5][2];
 
-    // 定义一个数组适配器，用来绑定召唤师技能的数据
-    private ArrayAdapter<String> spellAdapter;
+    // 定义一个数组，表示每个召唤师技能的原始冷却时间（单位：秒）
+    private int[] spellCooldowns = {300, 240, 180, 210, 210, 360, 180, 90}; // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
 
-    // 定义一个常量，表示星界洞悉天赋的冷却时间减少百分比
-    private static final double INSIGHT_REDUCTION = 0.15;
-
-    // 定义一个二维数组，表示每个召唤师技能的原始冷却时间（单位：秒）
-    private int[][] spellCooldowns = {
-            {300, 240, 180, 210, 210, 360, 180, 90}, // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
-            {300, 240, 180, 210, 210, 360, 180, 90}, // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
-            {300, 240, 180, 210, 210, 360, 180, 90}, // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
-            {300, 240, 180, 210, 210, 360, 180, 90}, // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
-            {300, 240, 180, 210, 210, 360, 180, 90}  // 闪现、治疗、点燃、虚弱、净化、传送、屏障、惩戒
-    };
-
-    // 定义一个二维数组，表示每个召唤师技能的剩余冷却时间（单位：秒）
-    private int[][] spellRemains = new int[5][2];
-
-    // 定义一个二维数组，表示每个召唤师技能的倒计时是否开始
-    private boolean[][] spellStarted = new boolean[5][2];
+    // 定义一个二维数组，表示每个召唤师技能的倒计时器
+    private CountDownTimer[][] countDownTimers = new CountDownTimer[5][2];
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         // 初始化控件
         initViews();
-
-        // 初始化数据
-        initData();
-
-        // 初始化监听器
-        initListeners();
+        
+        // 初始化按钮点击事件
+        initButtonListeners();
+        
+        // 初始化MediaPlayer
+        initMediaPlayer();
     }
+    
     // 初始化控件的方法
-    private void initViews()
-    {
+    private void initViews() {
         // 通过id找到控件
-        for (int i = 0; i < 5; i++)
-        {
-            laneSpinners[i] = findViewById(getResources().getIdentifier("lane" + (i + 1), "id", getPackageName()));
-            for (int j = 0; j < 2; j++)
-            {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 2; j++) {
                 spellSpinners[i][j] = findViewById(getResources().getIdentifier("spell" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
                 startButtons[i][j] = findViewById(getResources().getIdentifier("start" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
                 timeTextViews[i][j] = findViewById(getResources().getIdentifier("time" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
-                insightSwitches[i][j] = findViewById(getResources().getIdentifier("insight" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
+                insightCheckBoxes[i][j] = findViewById(getResources().getIdentifier("insight" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
+                bootsCheckBoxes[i][j] = findViewById(getResources().getIdentifier("boots" + (i + 1) + "_" + (j + 1), "id", getPackageName()));
+                
+                // 设置Spinner的选择监听器，实现同一分路两个技能不能选择相同技能的逻辑
+                setupSpinnerListener(i, j);
             }
         }
     }
-
-    // 初始化数据的方法
-    private void initData()
-    {
-        // 创建一个数组适配器，用来绑定召唤师技能的数据
-        spellAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.spells));
-        // 设置下拉菜单的样式
-        spellAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // 给每个召唤师技能的spinner设置适配器
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-                spellSpinners[i][j].setAdapter(spellAdapter);
-            }
-        }
-    }
-
-    // 初始化监听器的方法
-    private void initListeners()
-    {
-        // 给每个路线的spinner设置选择监听器
-        for (int i = 0; i < 5; i++)
-        {
-            final int laneIndex = i;
-            laneSpinners[i].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-            {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                {
-                    // 当用户选择了一个路线时，显示一个提示信息
-                    Toast.makeText(MainActivity.this, "你选择了" + lanes[laneIndex], Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent)
-                {
-
-                }
-            });
-        }
-
-        // 给每个召唤师技能的spinner设置选择监听器
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-                final int laneIndex = i;
-                final int spellIndex = j;
-                spellSpinners[i][j].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-                {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-                    {
-                        // 当用户选择了一个召唤师技能时，更新该技能的原始冷却时间
-                        spellCooldowns[laneIndex][spellIndex] = 300 - position * 30;
-                        // 如果该技能的倒计时没有开始，就更新该技能的剩余冷却时间
-                        if (!spellStarted[laneIndex][spellIndex])
-                        {
-                            spellRemains[laneIndex][spellIndex] = spellCooldowns[laneIndex][spellIndex];
-                            // 如果该技能带了星界洞悉天赋，就根据冷却时间减少百分比更新剩余冷却时间
-                            if (insightSwitches[laneIndex][spellIndex].isChecked())
-                            {
-                                spellRemains[laneIndex][spellIndex] = (int) (spellRemains[laneIndex][spellIndex] * (1 - INSIGHT_REDUCTION));
+    
+    // 设置Spinner的选择监听器
+    private void setupSpinnerListener(final int laneIndex, final int spellIndex) {
+        spellSpinners[laneIndex][spellIndex].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 获取另一个技能的Spinner
+                int otherSpellIndex = (spellIndex == 0) ? 1 : 0;
+                Spinner otherSpinner = spellSpinners[laneIndex][otherSpellIndex];
+                
+                // 如果选择了非"未选择"的技能，则在另一个Spinner中禁用该选项
+                if (position != 0) { // 0是"未选择"的索引
+                    // 获取当前选中的技能名称
+                    String selectedSpell = parent.getItemAtPosition(position).toString();
+                    
+                    // 获取原始的完整技能列表
+                    String[] allSpells = getResources().getStringArray(R.array.spells);
+                    
+                    // 保存另一个Spinner当前选中的位置
+                    int otherSelectedPosition = otherSpinner.getSelectedItemPosition();
+                    String otherSelectedSpell = null;
+                    if (otherSelectedPosition > 0) {
+                        otherSelectedSpell = otherSpinner.getSelectedItem().toString();
+                    }
+                    
+                    // 创建一个新的适配器
+                    ArrayAdapter<String> newAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_item);
+                    newAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    
+                    // 添加所有技能，除了当前选中的技能
+                    for (String spell : allSpells) {
+                        if (!spell.equals(selectedSpell)) {
+                            newAdapter.add(spell);
+                        }
+                    }
+                    
+                    // 设置新的适配器
+                    otherSpinner.setAdapter(newAdapter);
+                    
+                    // 如果另一个Spinner之前有选中的技能，尝试恢复选择
+                    if (otherSelectedSpell != null) {
+                        for (int i = 0; i < newAdapter.getCount(); i++) {
+                            if (newAdapter.getItem(i).equals(otherSelectedSpell)) {
+                                otherSpinner.setSelection(i);
+                                break;
                             }
-                            // 将剩余冷却时间格式化为分:秒的形式，并显示在TextView上
-                            timeTextViews[laneIndex][spellIndex].setText(formatTime(spellRemains[laneIndex][spellIndex]));
                         }
                     }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent)
-                    {
-
-                    }
-                });
+                }
             }
-        }
-
-        // 给每个开始倒计时的按钮设置点击监听器
-        for (int i = 0; i < 5; i++)
-        {
-            for (int j = 0; j < 2; j++)
-            {
-                final int laneIndex = i;
-                final int spellIndex = j;
-                startButtons[i][j].setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        // 当用户点击了开始倒计时的按钮时，判断该技能的倒计时是否已经开始
-                        if (spellStarted[laneIndex][spellIndex])
-                        {
-                            // 如果已经开始，就停止倒计时，并将按钮文本改为“开始”
-                            stopCountDown(laneIndex, spellIndex);
-                            startButtons[laneIndex][spellIndex].setText("开始");
-                        }
-                        else
-                        {
-                            // 如果没有开始，就开始倒计时，并将按钮文本改为“停止”
-                            startCountDown(laneIndex, spellIndex);
-                            startButtons[laneIndex][spellIndex].setText("停止");
-                        }
-                    }
-                });
+            
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // 不做任何操作
             }
-        }
-
-        // 给每个确认是否带了星界洞悉天赋的Switch控件设置切换监听器
+        });
+    }
+    
+    // 初始化按钮点击事件的方法
+    private void initButtonListeners() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 2; j++) {
                 final int laneIndex = i;
                 final int spellIndex = j;
-                insightSwitches[i][j].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                
+                startButtons[i][j].setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        // 当用户切换了星界洞悉天赋的状态时，判断该技能的倒计时是否已经开始
-                        if (spellStarted[laneIndex][spellIndex]) {
-                            // 如果已经开始，就停止倒计时，并重新计算剩余冷却时间
-                            stopCountDown(laneIndex, spellIndex);
-                            spellRemains[laneIndex][spellIndex] = spellCooldowns[laneIndex][spellIndex];
-                            // 如果该技能带了星界洞悉天赋，就根据冷却时间减少百分比更新剩余冷却时间
-                            if (isChecked) {
-                                spellRemains[laneIndex][spellIndex] = (int) (spellRemains[laneIndex][spellIndex] * (1 - INSIGHT_REDUCTION));
-                            }
-                            // 将剩余冷却时间格式化为分:秒的形式，并显示在TextView上
-                            timeTextViews[laneIndex][spellIndex].setText(formatTime(spellRemains[laneIndex][spellIndex]));
-                            // 重新开始倒计时
-                            startCountDown(laneIndex, spellIndex);
-                        } else {
-                            // 如果没有开始，就只更新原始冷却时间
-                            spellCooldowns[laneIndex][spellIndex] = 300 - spellSpinners[laneIndex][spellIndex].getSelectedItemPosition() * 30;
-                            // 如果该技能带了星界洞悉天赋，就根据冷却时间减少百分比更新剩余冷却时间
-                            if (isChecked) {
-                                spellRemains[laneIndex][spellIndex] = (int) (spellCooldowns[laneIndex][spellIndex] * (1 - INSIGHT_REDUCTION));
-                            } else {
-                                spellRemains[laneIndex][spellIndex] = spellCooldowns[laneIndex][spellIndex];
-                            }
-                            // 将剩余冷却时间格式化为分:秒的形式，并显示在TextView上
-                            timeTextViews[laneIndex][spellIndex].setText(formatTime(spellRemains[laneIndex][spellIndex]));
+                    public void onClick(View v) {
+                        // 获取选中的召唤师技能索引
+                        int selectedSpellIndex = spellSpinners[laneIndex][spellIndex].getSelectedItemPosition();
+                        
+                        // 检查是否选择了召唤师技能（不是"未选择"）
+                        if (selectedSpellIndex == 0) { // 0是"未选择"的索引
+                            showWarningDialog();
+                            return;
                         }
+                        
+                        // 计算CD时间（需要减1，因为添加了"未选择"选项）
+                        int cdTime = calculateCooldown(selectedSpellIndex - 1, laneIndex, spellIndex);
+                        
+                        // 禁用按钮和CheckBox
+                        startButtons[laneIndex][spellIndex].setEnabled(false);
+                        insightCheckBoxes[laneIndex][spellIndex].setEnabled(false);
+                        bootsCheckBoxes[laneIndex][spellIndex].setEnabled(false);
+                        
+                        // 重置文本颜色为黑色
+                        timeTextViews[laneIndex][spellIndex].setTextColor(Color.BLACK);
+                        
+                        // 开始倒计时
+                        startCountDown(laneIndex, spellIndex, cdTime);
                     }
                 });
             }
         }
-
     }
-
+    
+    // 显示警告对话框的方法
+    private void showWarningDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("警告！")
+               .setMessage("请选择一个召唤师技能！")
+               .setPositiveButton("明白了", null)
+               .show();
+    }
+    
+    // 计算冷却时间的方法
+    private int calculateCooldown(int spellIndex, int laneIndex, int spellPosition) {
+        // 获取基础CD时间
+        int baseCooldown = spellCooldowns[spellIndex];
+        
+        // 计算召唤师技能急速
+        int haste = 0;
+        
+        // 检查是否勾选了星界洞悉
+        if (insightCheckBoxes[laneIndex][spellPosition].isChecked()) {
+            haste += 18;
+        }
+        
+        // 检查是否勾选了CD鞋
+        if (bootsCheckBoxes[laneIndex][spellPosition].isChecked()) {
+            haste += 10;
+        }
+        
+        // 计算最终CD时间（公式：基础CD×(100/(100+召唤师技能急速))）
+        int finalCooldown = (int)(baseCooldown * (100.0 / (100 + haste)));
+        
+        return finalCooldown;
+    }
+    
     // 开始倒计时的方法
-    private void startCountDown(final int laneIndex, final int spellIndex)
-    {
-        // 创建一个线程，用来执行倒计时的逻辑
-        Thread thread = new Thread(new Runnable()
-        {
+    private void startCountDown(final int laneIndex, final int spellIndex, int seconds) {
+        // 如果已经有倒计时在运行，先取消它
+        if (countDownTimers[laneIndex][spellIndex] != null) {
+            countDownTimers[laneIndex][spellIndex].cancel();
+        }
+        
+        // 创建新的倒计时器
+        countDownTimers[laneIndex][spellIndex] = new CountDownTimer(seconds * 1000L, 1000) {
             @Override
-            public void run()
-            {
-                // 设置该技能的倒计时状态为已开始
-                spellStarted[laneIndex][spellIndex] = true;
-                // 循环执行倒计时的逻辑，直到剩余冷却时间为0或者倒计时被停止
-                while (spellRemains[laneIndex][spellIndex] > 0 && spellStarted[laneIndex][spellIndex])
-                {
-                    // 每隔一秒，将剩余冷却时间减一
-                    spellRemains[laneIndex][spellIndex]--;
-                    // 在主线程中更新UI，将剩余冷却时间格式化为分:秒的形式，并显示在TextView上
-                    runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            timeTextViews[laneIndex][spellIndex].setText(formatTime(spellRemains[laneIndex][spellIndex]));
-                        }
-                    });
-                    // 休眠一秒
-                    try
-                    {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-                // 如果倒计时结束，就在主线程中更新UI，将按钮文本改为“开始”，并显示一个提示信息
-                if (spellRemains[laneIndex][spellIndex] == 0)
-                {
-                    runOnUiThread(new Runnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            startButtons[laneIndex][spellIndex].setText("开始");
-                            Toast.makeText(MainActivity.this, lanes[laneIndex] + "的召唤师技能" + spellSpinners[laneIndex][spellIndex].getSelectedItem() + "已经冷却完毕", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-                // 设置该技能的倒计时状态为未开始
-                spellStarted[laneIndex][spellIndex] = false;
+            public void onTick(long millisUntilFinished) {
+                // 计算分钟和秒数
+                int minutes = (int) (millisUntilFinished / 1000) / 60;
+                int seconds = (int) (millisUntilFinished / 1000) % 60;
+                
+                // 更新显示
+                timeTextViews[laneIndex][spellIndex].setText(String.format("%02d:%02d", minutes, seconds));
             }
-        });
-        // 启动线程
-        thread.start();
+            
+            @Override
+            public void onFinish() {
+                // 倒计时结束，显示"冷却完毕"并将文字变为红色
+                timeTextViews[laneIndex][spellIndex].setText("冷却完毕");
+                timeTextViews[laneIndex][spellIndex].setTextColor(Color.RED);
+                
+                // 重新启用按钮和CheckBox
+                startButtons[laneIndex][spellIndex].setEnabled(true);
+                insightCheckBoxes[laneIndex][spellIndex].setEnabled(true);
+                bootsCheckBoxes[laneIndex][spellIndex].setEnabled(true);
+                
+                // 播放提示音
+                playNotificationSound();
+            }
+        };
+        
+        // 开始倒计时
+        countDownTimers[laneIndex][spellIndex].start();
     }
-
-    // 停止倒计时的方法
-    private void stopCountDown(int laneIndex, int spellIndex)
-    {
-        // 设置该技能的倒计时状态为未开始
-        spellStarted[laneIndex][spellIndex] = false;
+    
+    // 初始化MediaPlayer的方法
+    private void initMediaPlayer() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.notification_sound);
     }
-
-    // 格式化时间的方法，将秒数转换为分:秒的形式
-    private String formatTime(int seconds)
-    {
-        // 计算分钟数
-        int minutes = seconds / 60;
-        // 计算秒数
-        int secs = seconds % 60;
-        // 返回格式化后的字符串，如果秒数小于10，就在前面补一个0
-        return minutes + ":" + (secs < 10 ? "0" + secs : secs);
+    
+    // 播放提示音的方法
+    private void playNotificationSound() {
+        if (mediaPlayer != null) {
+            // 如果MediaPlayer正在播放，先停止并重置
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                mediaPlayer = MediaPlayer.create(this, R.raw.notification_sound);
+            }
+            // 播放提示音
+            mediaPlayer.start();
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        
+        // 取消所有倒计时器
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (countDownTimers[i][j] != null) {
+                    countDownTimers[i][j].cancel();
+                }
+            }
+        }
+        
+        // 释放MediaPlayer资源
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

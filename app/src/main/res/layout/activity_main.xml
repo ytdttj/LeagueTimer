@@ -1,18 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:paddingTop="24dp">
+
+    <!-- 使用一个垂直引导线来实现垂直居中 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <!-- 标题文本 -->
+    <TextView
+        android:id="@+id/title_insight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="左边勾星界洞悉，右边勾CD鞋"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/top_lane_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
 
     <!-- 上路 -->
     <LinearLayout
+        android:id="@+id/top_lane_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/title_insight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/jungle_lane_container">
 
         <TextView
             android:id="@+id/lane1"
@@ -30,7 +59,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell1_1"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -51,12 +80,17 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight1_1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots1_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,7 +101,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell1_2"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -88,20 +122,30 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight1_2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots1_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 打野 -->
     <LinearLayout
+        android:id="@+id/jungle_lane_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/top_lane_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mid_lane_container">
 
         <TextView
             android:id="@+id/lane2"
@@ -119,7 +163,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell2_1"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -140,12 +184,17 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight2_1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots2_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -156,7 +205,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell2_2"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -177,20 +226,30 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight2_2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 中路 -->
     <LinearLayout
+        android:id="@+id/mid_lane_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/jungle_lane_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bot_lane_container">
 
         <TextView
             android:id="@+id/lane3"
@@ -208,7 +267,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell3_1"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -229,12 +288,17 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight3_1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots3_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -245,7 +309,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell3_2"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -266,20 +330,30 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight3_2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots3_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 下路 -->
     <LinearLayout
+        android:id="@+id/bot_lane_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/mid_lane_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/support_lane_container">
 
         <TextView
             android:id="@+id/lane4"
@@ -297,7 +371,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell4_1"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -318,12 +392,17 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight4_1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots4_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -334,7 +413,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell4_2"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -355,20 +434,30 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight4_2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots4_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- 辅助 -->
     <LinearLayout
+        android:id="@+id/support_lane_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/bot_lane_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:id="@+id/lane5"
@@ -386,7 +475,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell5_1"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -407,12 +496,17 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight5_1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots5_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
         <LinearLayout
@@ -423,7 +517,7 @@
             <!-- 选择召唤师技能的下拉菜单 -->
             <Spinner
                 android:id="@+id/spell5_2"
-                android:layout_width="97dp"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:entries="@array/spells" />
 
@@ -444,13 +538,18 @@
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
-            <!-- 确认是否带了星界洞悉天赋的Switch控件 -->
-            <Switch
+            <!-- 确认是否带了星界洞悉天赋的CheckBox控件 -->
+            <CheckBox
                 android:id="@+id/insight5_2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="星界洞悉" />
+                android:layout_height="match_parent" />
+
+            <!-- 确认是否带了CD鞋的CheckBox控件 -->
+            <CheckBox
+                android:id="@+id/boots5_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

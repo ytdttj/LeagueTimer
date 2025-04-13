@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">League Timer</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
     <string-array name="spells">
+        <item>未选择</item>
         <item>闪现</item>
         <item>治疗</item>
         <item>点燃</item>
